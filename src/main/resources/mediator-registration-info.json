@@ -1,0 +1,133 @@
+{
+  "urn": "urn:uuid:c6617f30-5cbf-11ec-8fbb-f57866d76b5a",
+  "version": "0.1.0",
+  "name": "mrc_data",
+  "description": "entries from mrc",
+  "endpoints": [
+    {
+      "name": "mrc_data Route",
+      "host": "localhost",
+      "port": "3000",
+      "path": "/mediator",
+      "type": "http"
+    }
+  ],
+  "defaultChannelConfig": [
+    {
+      "methods": [
+        "GET"
+      ],
+      "type": "http",
+      "allow": [
+        "mrc"
+      ],
+      "whitelist": [],
+      "authType": "private",
+      "matchContentTypes": [],
+      "properties": [],
+      "txViewAcl": [
+        "mrc"
+      ],
+      "txViewFullAcl": [
+        "mrc"
+      ],
+      "txRerunAcl": [
+        "mrc"
+      ],
+      "status": "enabled",
+      "rewriteUrls": true,
+      "addAutoRewriteRules": true,
+      "autoRetryEnabled": true,
+      "autoRetryPeriodMinutes": 120,
+      "routes": [
+        {
+          "type": "http",
+          "status": "enabled",
+          "forwardAuthHeader": false,
+          "name": "mrc-route",
+          "secured": false,
+          "host": "41.59.227.86",
+          "port": 80,
+          "path": "/api/mobile-app/v2/msd-data/",
+          "pathTransform": "",
+          "primary": true,
+          "username": "test",
+          "password": "PhoneField"
+        }
+      ],
+      "requestBody": true,
+      "responseBody": true,
+      "rewriteUrlsConfig": [],
+      "name": "MRCAPP - MRC  ENTRY SYNC bB",
+      "description": "MRC app Sends data backend",
+      "timeout": 80000,
+      "matchContentRegex": null,
+      "matchContentXpath": null,
+      "matchContentValue": null,
+      "matchContentJson": null,
+      "urlPattern": "^/household$",
+      "maxBodyAgeDays": 60,
+      "autoRetryMaxAttempts": 40,
+      "alerts": [
+        {
+          "condition": "status",
+          "groups": [],
+          "users": [
+            {
+              "maxAlerts": "1 per hour",
+              "user": "johnboscoadam@gmail.com",
+              "method": "email"
+            },
+            {
+              "maxAlerts": "1 per hour",
+              "user": "root@openhim.org",
+              "method": "sms"
+            }
+          ],
+          "status": "2xx"
+        }
+      ],
+      "pollingSchedule": null,
+      "tcpHost": null,
+      "tcpPort": null,
+      "updatedBy": {
+        "name": "Cron"
+      },
+      "priority": 1
+    },
+
+
+    {
+      "name": "mrc_data",
+      "urlPattern": "^/mrc-mediator$",
+      "type": "http",
+      "allow": ["mrc_data"],
+      "routes": [
+        {
+          "name": "mrc_data Route",
+          "host": "localhost",
+          "port": "3000",
+          "path": "/mrc-mediator",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    }
+  ],
+  "configDefs":[
+    {
+      "param": "HfrConfigs",
+      "displayName": "HFR Configurations",
+      "description": "HFR pulling operating facilities",
+      "type": "struct",
+      "template": [
+        {
+          "param": "url",
+          "displayName": "URL",
+          "description": "url Endpoint",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}
