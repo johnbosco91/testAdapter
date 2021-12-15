@@ -22,12 +22,12 @@ public class DestinationTest extends MockHTTPConnector {
     public Map<String, String> getHeaders() {
         return null;
     }
-
+//    xmlDestTest
     @Override
     public void executeOnReceive(MediatorHTTPRequest mediatorHTTPRequest) {
         String Iliyopokelewa = mediatorHTTPRequest.getBody();
         JSONObject objectIliyopokelewa = new JSONObject(Iliyopokelewa);
-        Assert.assertEquals("jamatini", objectIliyopokelewa.getString("name"));
+        Assert.assertEquals("jamatini Health Center", objectIliyopokelewa.getString("name"));
         Assert.assertEquals("120321-5", objectIliyopokelewa.getString("code"));
         Assert.assertEquals("jamatini", objectIliyopokelewa.getString("shortName"));
         Assert.assertEquals("2021-04-08", objectIliyopokelewa.getString("openingDate"));

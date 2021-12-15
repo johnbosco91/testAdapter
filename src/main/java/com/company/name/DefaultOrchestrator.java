@@ -10,13 +10,10 @@ import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPResponse;
 
-
 public class DefaultOrchestrator extends UntypedActor {
     LoggingAdapter log = Logging.getLogger(getContext().system(), this);
 
     private final MediatorConfig config;
-
-
     public DefaultOrchestrator(MediatorConfig config) {
         this.config = config;
     }
@@ -42,7 +39,7 @@ public class DefaultOrchestrator extends UntypedActor {
             orgUnit.put("code", jsonObject.get("OwnershipGroupCode"));
             OrgUnits.put(orgUnit);
             String jsonString = new JSONObject()
-                    .put("name", jsonObject.get("Name"))
+                    .put("name", jsonObject.get("Name") + " " + jsonObject.get("FacilityType"))
                     .put("code", jsonObject.get("Fac_IDNumber"))
                     .put("shortName", jsonObject.get("Comm_FacName"))
                     .put("openingDate", jsonObject.get("OpenedDate"))
@@ -64,8 +61,8 @@ public class DefaultOrchestrator extends UntypedActor {
             //firing request
             httpConnector.tell(hfrRequest, getSelf());
         } else if (msg instanceof MediatorHTTPResponse) {
-            MediatorHTTPResponse resp = new MediatorHTTPResponse((MediatorHTTPRequest) ((MediatorHTTPResponse) msg).getOriginalRequest(),((MediatorHTTPResponse) msg).getBody(), 400, ((MediatorHTTPResponse) msg).getHeaders());
-            ((MediatorHTTPResponse) msg).getOriginalRequest().getRequestHandler().tell(( resp).toFinishRequest(), getSelf());
+            MediatorHTTPResponse resp = new MediatorHTTPResponse((MediatorHTTPRequest) ((MediatorHTTPResponse) msg).getOriginalRequest(), ((MediatorHTTPResponse) msg).getBody(), 400, ((MediatorHTTPResponse) msg).getHeaders());
+            ((MediatorHTTPResponse) msg).getOriginalRequest().getRequestHandler().tell((resp).toFinishRequest(), getSelf());
         } else {
             unhandled(msg);
         }

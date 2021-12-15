@@ -55,7 +55,6 @@ public class DefaultOrchestratorTest {
                     "    \"url\":\"https://reqbin.com/echo/post/json\"\n" +
                     "}"));
             final ActorRef defaultOrchestrator = system.actorOf(Props.create(DefaultOrchestrator.class, testConfig));
-
             String sampleData="{\n" +
                     "    \"Fac_IDNumber\": \"120321-5\",\n" +
                     "    \"Name\": \"jamatini\",\n" +
@@ -102,9 +101,7 @@ public class DefaultOrchestratorTest {
                     Collections.<String, String>singletonMap("Content-Type", "text/plain"),
                     Collections.<Pair<String, String>>emptyList()
             );
-
             defaultOrchestrator.tell(POST_Request, getRef());
-
             final Object[] out =
                     new ReceiveWhile<Object>(Object.class, duration("5 second")) {
                         @Override

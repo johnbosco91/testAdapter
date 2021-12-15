@@ -10,7 +10,15 @@
       "port": "3000",
       "path": "/mediator",
       "type": "http"
+    },
+    {
+      "name": "mrc_data Route",
+      "host": "localhost",
+      "port": "3000",
+      "path": "/xmlMediator",
+      "type": "http"
     }
+
   ],
   "defaultChannelConfig": [
     {
@@ -125,6 +133,20 @@
           "param": "url",
           "displayName": "URL",
           "description": "url Endpoint",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "param": "XmlConfigs",
+      "displayName": "GEPG Configurations",
+      "description": "GEPG pulling operating facilities",
+      "type": "struct",
+      "template": [
+        {
+          "param": "url2",
+          "displayName": "URL",
+          "description": "url2 Endpoint",
           "type": "string"
         }
       ]
