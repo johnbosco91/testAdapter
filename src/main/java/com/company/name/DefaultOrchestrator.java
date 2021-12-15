@@ -65,7 +65,6 @@ public class DefaultOrchestrator extends UntypedActor {
             httpConnector.tell(hfrRequest, getSelf());
         } else if (msg instanceof MediatorHTTPResponse) {
             MediatorHTTPResponse resp = new MediatorHTTPResponse((MediatorHTTPRequest) ((MediatorHTTPResponse) msg).getOriginalRequest(),((MediatorHTTPResponse) msg).getBody(), 400, ((MediatorHTTPResponse) msg).getHeaders());
-
             ((MediatorHTTPResponse) msg).getOriginalRequest().getRequestHandler().tell(( resp).toFinishRequest(), getSelf());
         } else {
             unhandled(msg);
