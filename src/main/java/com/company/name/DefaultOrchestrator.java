@@ -61,13 +61,12 @@ public class DefaultOrchestrator extends UntypedActor {
                     hfrUri, jsonString, null, null, null);
             //Getting instance of the http connector
             ActorSelection httpConnector = getContext().actorSelection(config.userPathFor("http-connector"));
-
             //firing request
             httpConnector.tell(hfrRequest, getSelf());
-
-//            httpConnector.tell(jsonString, getSelf());
         } else if (msg instanceof MediatorHTTPResponse) {
-            ((MediatorHTTPResponse) msg).getOriginalRequest().getRequestHandler().tell(((MediatorHTTPResponse) msg).toFinishRequest(), getSelf());
+            MediatorHTTPResponse resp = new MediatorHTTPResponse((MediatorHTTPRequest) ((MediatorHTTPResponse) msg).getOriginalRequest(),((MediatorHTTPResponse) msg).getBody(), 400, ((MediatorHTTPResponse) msg).getHeaders());
+
+            ((MediatorHTTPResponse) msg).getOriginalRequest().getRequestHandler().tell(( resp).toFinishRequest(), getSelf());
         } else {
             unhandled(msg);
         }
