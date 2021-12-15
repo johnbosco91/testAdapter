@@ -106,7 +106,7 @@ public class DefaultOrchestratorTest {
             defaultOrchestrator.tell(POST_Request, getRef());
 
             final Object[] out =
-                    new ReceiveWhile<Object>(Object.class, duration("1 second")) {
+                    new ReceiveWhile<Object>(Object.class, duration("5 second")) {
                         @Override
                         protected Object match(Object msg) throws Exception {
                             if (msg instanceof FinishRequest) {
