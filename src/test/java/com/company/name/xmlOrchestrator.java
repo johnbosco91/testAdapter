@@ -85,10 +85,10 @@ public class xmlOrchestrator {
                     new ReceiveWhile<Object>(Object.class, duration("5 second")) {
                         @Override
                         protected Object match(Object msg) throws Exception {
-                            if (msg instanceof FinishRequest) {
+//                            if (msg instanceof FinishRequest) {
                                 return msg;
-                            }
-                            throw noMatch();
+//                            }
+//                            throw noMatch();
                         }
                     }.get();
 
